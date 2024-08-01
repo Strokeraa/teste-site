@@ -3,7 +3,7 @@ document.querySelector("button[type='submit']").addEventListener("click", functi
 
     const numeroRNC = document.getElementById("numero_rnc").value;
 
-    fetch("seu_script_servidor.php", {
+    fetch("server.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
