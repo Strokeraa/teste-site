@@ -1,38 +1,26 @@
+// Substitua pelos detalhes do seu projeto Supabase
+const SUPABASE_URL = 'https://your-supabase-url.supabase.co';
+const SUPABASE_ANON_KEY = 'your-anon-key';
+
+// Inicialize o cliente Supabase
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 async function consultarNotificacao() {
-    const numeroNotificacao = document.getElementById("numeroNotificacao").value;
+    const numero = document.getElementById('numeroNotificacao').value;
+    
+    // Consulta ao Supabase
+    const { data, error } = await supabase
+        .from('notificacoes')
+        .select('*')
+        .eq('id', numero);
 
-    const response = await fetch('/.netlify/functions/consultar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ no: numeroNotificacao })
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-        exibirNotificacao(data);
+    if (error) {
+        document.getElementById('resultado').innerText = 'Erro: ' + error.message;
     } else {
-        exibirErro(data.error);
+        if (data.length > 0) {
+            document.getElementById('resultado').innerText = 'Notificação: ' + JSON.stringify(data[0]);
+        } else {
+            document.getElementById('resultado').innerText = 'Notificação não encontrada.';
+        }
     }
-}
-
-function exibirNotificacao(notificacao) {
-    const resultadoDiv = document.getElementById("resultado");
-    resultadoDiv.innerHTML = `
-        <h2>Notificação ${notificacao.no}</h2>
-        <p>Fornecedor: ${notificacao.fornecedor}</p>
-        <p>Material: ${notificacao.material}</p>
-        <p>Descrição do Problema: ${notificacao.descricao_problema}</p>
-        <p>Data: ${notificacao.data}</p>
-        <p>Código: ${notificacao.codigo}</p>
-        <p>Quantidade Interditada: ${notificacao.quantidade_interditada}</p>
-        <p>Contato: ${notificacao.contato}</p>
-    `;
-}
-
-function exibirErro(mensagem) {
-    const resultadoDiv = document.getElementById("resultado");
-    resultadoDiv.innerHTML = `<p class="error">${mensagem}</p>`;
 }
