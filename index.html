@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta SAP</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script> </head>
+    <title>Consulta de Notificações</title>
+</head>
 <body>
-    <div class="container">
-        <h1>Consulta de RNC 2</h1>
-            <label for="numero_rnc">Número RNC:</label>
-            <input type="text" id="numero_rnc" name="numero_rnc" required>
-            <button type="submit">Consultar</button>
-    </div>
+    <h1>Consulta de Notificações</h1>
+    <input type="text" id="numeroNotificacao" placeholder="Digite o número da notificação">
+    <button onclick="consultarNotificacao()">Consultar</button>
+    <div id="resultado"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>

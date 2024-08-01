@@ -1,0 +1,10 @@
+{
+    "fornecedor": "A AGUAMAR TRANSPORTES LTDA",
+    "material": "RETENTOR 02485BY KG NBR",
+    "no": "000200000753",
+    "descricao_problema": "quantidade n\u00e3o conforme",
+    "data": "2024-02-06",
+    "codigo": "000000000000008097",
+    "quantidade_interditada": 100.0,
+    "contato": "RSJCOSTA@sabo.com.br"
+}

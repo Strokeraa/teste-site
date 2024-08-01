@@ -1,20 +1,38 @@
-document.querySelector("button[type='submit']").addEventListener("click", function(event) {
-    event.preventDefault();
+async function consultarNotificacao() {
+    const numeroNotificacao = document.getElementById("numeroNotificacao").value;
 
-    const numeroRNC = document.getElementById("numero_rnc").value;
-
-    fetch("server.php", {
-        method: "POST",
+    const response = await fetch('/.netlify/functions/consultar', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            'Content-Type': 'application/json'
         },
-        body: new URLSearchParams({ numero_rnc: numeroRNC })
-    })
-    .then(response => response.text()) // Ou response.json() se esperar JSON
-    .then(data => {
-        console.log(data); // Trate a resposta aqui
-    })
-    .catch(error => {
-        console.error("Erro:", error);
+        body: JSON.stringify({ no: numeroNotificacao })
     });
-});
+
+    const data = await response.json();
+
+    if (response.ok) {
+        exibirNotificacao(data);
+    } else {
+        exibirErro(data.error);
+    }
+}
+
+function exibirNotificacao(notificacao) {
+    const resultadoDiv = document.getElementById("resultado");
+    resultadoDiv.innerHTML = `
+        <h2>Notificação ${notificacao.no}</h2>
+        <p>Fornecedor: ${notificacao.fornecedor}</p>
+        <p>Material: ${notificacao.material}</p>
+        <p>Descrição do Problema: ${notificacao.descricao_problema}</p>
+        <p>Data: ${notificacao.data}</p>
+        <p>Código: ${notificacao.codigo}</p>
+        <p>Quantidade Interditada: ${notificacao.quantidade_interditada}</p>
+        <p>Contato: ${notificacao.contato}</p>
+    `;
+}
+
+function exibirErro(mensagem) {
+    const resultadoDiv = document.getElementById("resultado");
+    resultadoDiv.innerHTML = `<p class="error">${mensagem}</p>`;
+}
