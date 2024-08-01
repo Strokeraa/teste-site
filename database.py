@@ -8,14 +8,14 @@ table_name = 'notificacoes'
 
 # Dados a serem inseridos
 data = {
-    "fornecedor": "A AGUAMAR TRANSPORTES LTDA",
-    "material": "RETENTOR 02485BY KG NBR",
-    "no": "000200000753",
-    "descricao_problema": "quantidade não conforme",
-    "data": "2024-02-06",
-    "codigo": "000000000000008097",
-    "quantidade_interditada": 100.0,
-    "contato": "RSJCOSTA@sabo.com.br"
+    "fornecedor": "A teste",
+    "material": "a",
+    "no": "234",
+    "descricao_problema": "c",
+    "data": "2025-02-06",
+    "codigo": "023412",
+    "quantidade_interditada": 50.0,
+    "contato": "RsdsaSJCOSTA@sabo.com.br"
 }
 
 # Configuração dos headers
